@@ -1,0 +1,23 @@
+The /.hidden directory is full of nested directories, that we are going to download and inspect
+It is a little tricky because of the robots.txt and the depth of directories, but after some crafting this gets us there:
+
+wget --no-clobber --convert-links --random-wait -r -p --level 4 -E -e robots=off -U mozilla http://10.18.191.94/.hidden
+
+We then can cat all the README to get the info:
+
+cat */*/*/README
+
+But it is unreadable, too much information, we have to filter a bit those phrases:
+   
+    Demande à ton voisin du dessous 
+    Tu veux de l'aide ? Moi aussi !  
+    Demande à ton voisin de gauche  
+    Non ce n'est toujours pas bon ...
+    Toujours pas tu vas craquer non ?
+
+
+With grep -v we can easily remove those, giving us the first flag
+
+┌──(amuller㉿Laptop)-[~/…/discovery/test/10.18.191.94/.hidden]
+└─$ cat */*/*/README | grep -v Demande | grep -v Toujours | grep -v Non | grep -v Tu
+Hey, here is your flag : d5eec3ec36cf80dce44a896f961c1831a05526ec215693c8f2c39543497d4466

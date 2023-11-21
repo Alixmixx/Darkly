@@ -1,0 +1,23 @@
+┌──(amuller㉿Laptop)-[~/Documents/Darkly]
+└─$ sudo nmap -sC -sV -O -p 80 10.18.191.94
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2023-11-21 17:56 CET
+Nmap scan report for 10.18.191.94
+Host is up (0.00042s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    nginx 1.4.6 (Ubuntu)
+|_http-title: BornToSec - Web Section
+|_http-server-header: nginx/1.4.6 (Ubuntu)
+| http-robots.txt: 2 disallowed entries 
+|_/whatever /.hidden
+MAC Address: 08:00:27:F5:BE:92 (Oracle VirtualBox virtual NIC)
+Warning: OSScan results may be unrse
+Running: Linux 3.X|4.Xeliable because we could not find at least 1 open and 1 closed port
+Device type: general purpo
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.2 - 4.9
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 8.17 seconds

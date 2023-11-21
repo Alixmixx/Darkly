@@ -1,0 +1,65 @@
+┌──(amuller㉿Laptop)-[~/Documents/Darkly]
+└─$ dirb http://10.18.191.94 /usr/share/wordlists/dirb/common.txt 
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Tue Nov 21 17:58:57 2023
+URL_BASE: http://10.18.191.94/
+WORDLIST_FILES: /usr/share/wordlists/dirb/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://10.18.191.94/ ----
+==> DIRECTORY: http://10.18.191.94/admin/                                                                                                 
+==> DIRECTORY: http://10.18.191.94/audio/                                                                                                 
+==> DIRECTORY: http://10.18.191.94/css/                                                                                                   
+==> DIRECTORY: http://10.18.191.94/errors/                                                                                                
++ http://10.18.191.94/favicon.ico (CODE:200|SIZE:1406)                                                                                    
+==> DIRECTORY: http://10.18.191.94/fonts/                                                                                                 
+==> DIRECTORY: http://10.18.191.94/images/                                                                                                
+==> DIRECTORY: http://10.18.191.94/includes/                                                                                              
++ http://10.18.191.94/index.php (CODE:200|SIZE:6892)                                                                                      
+==> DIRECTORY: http://10.18.191.94/js/                                                                                                    
++ http://10.18.191.94/robots.txt (CODE:200|SIZE:53)                                                                                       
+==> DIRECTORY: http://10.18.191.94/whatever/                                                                                              
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/admin/ ----
+==> DIRECTORY: http://10.18.191.94/admin/css/                                                                                             
+==> DIRECTORY: http://10.18.191.94/admin/fonts/                                                                                           
++ http://10.18.191.94/admin/index.php (CODE:200|SIZE:1432)                                                                                
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/audio/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/css/ ----
+==> DIRECTORY: http://10.18.191.94/css/images/                                                                                            
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/errors/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/fonts/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/images/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/includes/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/js/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/whatever/ ----
++ http://10.18.191.94/whatever/htpasswd (CODE:200|SIZE:38)                                                                                
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/admin/css/ ----
+==> DIRECTORY: http://10.18.191.94/admin/css/images/                                                                                      
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/admin/fonts/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/css/images/ ----
+                                                                                                                                          
+---- Entering directory: http://10.18.191.94/admin/css/images/ ----
+                                                                                                                                          
+-----------------
+END_TIME: Tue Nov 21 17:59:14 2023
+DOWNLOADED: 64568 - FOUND: 5
