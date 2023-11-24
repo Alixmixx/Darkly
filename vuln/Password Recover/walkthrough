@@ -1,0 +1,14 @@
+We tried investigating the password recover page. After some tries with burp repeater to find a parameter to change,
+We found in the returned web page an hidden input:
+
+    <form action="#" method="POST">
+        <input type="hidden" name="mail" value="webmaster@borntosec.com" maxlength="15">
+        <input type="submit" name="Submit" value= "Submit">
+    </form>
+
+Going back to the page, we are able to inspect the site, and remove the hidden input
+After typing admin inside it, we get the flag (lol)
+
+ The flag is : 1d4855f7337c0c14b6f44946872c4eb33853f40b2d54393fbe94f49f1e19bbb0
+
+ 1d4855f7337c0c14b6f44946872c4eb33853f40b2d54393fbe94f49f1e19bbb0 = recoverthis

